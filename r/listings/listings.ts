@@ -9,6 +9,36 @@ import { clear } from "../../src/ts/ui";
 import { generateToast } from "../../src/ts/ui/toast/toaster";
 import { Listing } from "../../src/types/listing";
 
+const generateCard = (listing: Listing) => {
+  const { description, updated, title, tags, media, endsAt } = listing;
+  return `<div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
+    <div class="w-full aspect-video relative">
+      <img
+        src=${media[0]}
+        class="w-full aspect-video rounded-t-xl"
+      />
+      <div
+        class="absolute right-3 -bottom-3 bg-background shadow w-32 h-8 rounded-full flex items-center justify-center text-sm"
+      >
+        Ends in 2 days
+      </div>
+    </div>
+    <div class="flex flex-col h-auto px-4 text-sm text-text">
+      <p class="text-text/50">${title}</p>
+      <p class="font-heading text-base">
+        ${description}
+      </p>
+      <div class="flex items-center gap-3">
+
+      </div>
+      <div class="w-full h-auto mt-8 flex items-center gap-2 mb-2">
+        <div class="w-10 aspect-square rounded-full bg-blue-600"></div>
+        <p>Magugu</p>
+      </div>
+    </div>
+    </div>`;
+};
+
 const mainContainer = document.querySelector("#main-container") as HTMLElement;
 const paginationsContainer = document.querySelector(
   "#pagination-container"
@@ -49,11 +79,9 @@ const getListings = async () => {
   try {
     let res = await fetch(BASE_URL + `/listings?limit=20&offset=${offset}`);
     let data: Listing[] = await res.json();
-    mainContainer.innerHTML += `<pre class="text-sm max-w-7xl overflow-hidden">${JSON.stringify(
-      data,
-      null,
-      "\t"
-    )}</pre>`;
+    mainContainer.innerHTML += data.map((listing) => {
+      return generateCard(listing);
+    });
   } catch (error) {
     generateToast("error", "Error");
   }
