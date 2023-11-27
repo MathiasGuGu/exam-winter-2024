@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/public/auctionlogo.png" />
+    <title>Auctioneer: View, Bid, and list items.</title>
+    <meta
+      name="description"
+      content="Auctioneer lets stud.noroff users create listings, bid on items, and view listed items. Free for all Noroff Students"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Change to live url -->
+    <link rel="canonical" href="http://localhost:5173/" />
+    <link rel="stylesheet" href="./src/style.css" />
+
+    <script type="module" src="/src/main.ts" defer></script>
+    <script type="module" src="/src/ts/ui/navbar/navbar.ts" defer></script>
+  </head>
+  <body>
+    <nav
+      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+    >
+      <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
+        <div
+          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
+        >
+          <img
+            src="/public/auctionlogo.png"
+            alt="auctioneer logo"
+            class="h-10 w-10"
+          />
+        </div>
+        <a
+          href="/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Home</a
+        >
+        <a
+          href="/r/listings/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Listings</a
+        >
+      </ul>
+      <div
+        id="nav-user-state"
+        class="flex items-center justify-center font-body"
+      ></div>
+    </nav>
+    <div class="w-screen h-auto flex items-center justify-center">
+      <section
+        class="w-full h-[90vh] flex flex-col items-center justify-center relative"
+      >
+        <div class="text-text text-text">
+          <div class="-space-y-6"></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

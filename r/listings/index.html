@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/public/auctionlogo.png" />
+    <title>Auctioneer: View, Bid, and list items.</title>
+    <meta
+      name="description"
+      content="Auctioneer lets stud.noroff users create listings, bid on items, and view listed items. Free for all Noroff Students"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Change to live url -->
+    <link rel="canonical" href="http://localhost:5173/" />
+    <link rel="stylesheet" href="/src/style.css" />
+
+    <script type="module" src="/src/main.ts" defer></script>
+    <script type="module" src="./listings.ts" defer></script>
+    <script type="module" src="/src/ts/ui/navbar/navbar.ts" defer></script>
+  </head>
+  <body>
+    <nav
+      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+    >
+      <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
+        <div
+          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
+        >
+          <img
+            src="/public/auctionlogo.png"
+            alt="auctioneer logo"
+            class="h-10 w-10"
+          />
+        </div>
+        <a
+          href="/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Home</a
+        >
+        <a
+          href="/r/listings/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Listings</a
+        >
+      </ul>
+      <div
+        id="nav-user-state"
+        class="flex items-center justify-center font-body"
+      ></div>
+    </nav>
+    <main
+      class="w-screen h-auto flex flex-col items-center justify-start mt-24"
+    >
+      <section class="w-full h-auto min-h-16 flex flex-col max-w-7xl space-y-2">
+        <div class="flex gap-3 font-text text-sm text-text/50">
+          <p class="text-text">Featured</p>
+          <p>Artwork</p>
+          <p>Apartments</p>
+          <p>Utensils</p>
+          <p class="text-blue-600">All categories</p>
+        </div>
+        <div class="border-b w-ful"></div>
+        <div>
+          <p class="text-text font-text text-sm">Featured Listings:</p>
+        </div>
+      </section>
+      <section
+        id="main-container"
+        class="w-full max-w-7xl h-auto mt-6 mb-6 flex flex-wrap gap-2"
+      >
+        <!--
+            Card component
+        -->
+        <!--
+        <div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
+          <div class="w-full aspect-video relative">
+            <img
+              src="https://images.unsplash.com/photo-1700506781191-102ea141ddc4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="w-full aspect-video rounded-t-xl"
+            />
+            <div
+              class="absolute right-3 -bottom-3 bg-background shadow w-32 h-8 rounded-full flex items-center justify-center text-sm"
+            >
+              Ends in 2 days
+            </div>
+          </div>
+          <div class="flex flex-col h-auto px-4 text-sm text-text">
+            <p class="text-text/50">The one Ring</p>
+            <p class="font-heading text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+              maiores numquam.
+            </p>
+            <div class="flex items-center gap-3">
+              Price:
+              <p class="font-heading text-blue-950 text-base">39 000 tokens</p>
+            </div>
+            <div class="w-full h-auto mt-8 flex items-center gap-2 mb-2">
+              <div class="w-10 aspect-square rounded-full bg-blue-600"></div>
+              <p>Magugu</p>
+            </div>
+          </div>
+        </div>
+
+
+       -->
+      </section>
+      <div
+        id="pagination-container"
+        class="w-full h-24 flex items-center justify-center gap-5"
+      ></div>
+    </main>
+  </body>
+</html>
