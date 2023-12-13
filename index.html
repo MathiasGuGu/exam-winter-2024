@@ -20,7 +20,7 @@
   </head>
   <body>
     <nav
-      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text"
     >
       <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
         <div
@@ -50,13 +50,64 @@
         class="flex items-center justify-center font-body"
       ></div>
     </nav>
-    <div class="w-screen h-auto flex items-center justify-center">
+    <div class="w-screen h-auto flex flex-col items-center justify-center">
       <section
-        class="w-full h-[90vh] flex flex-col items-center justify-center relative"
+        class="w-full h-[90vh] flex flex-col items-center justify-center relative gap-3 text-zinc-700"
       >
-        <div class="text-text text-text">
-          <div class="-space-y-6"></div>
+        <div class="w-full max-w-4xl flex items-center gap-24">
+          <p>1000+ Listings</p>
+          <p>100+ users</p>
         </div>
+        <div
+          class="w-full max-w-4xl flex items-center text-7xl font-light gap-4 justify-between"
+        >
+          <div class="flex gap-2">
+            <p class="font-black">Bidding</p>
+            On Items
+          </div>
+          <div
+            class="h-14 rounded-full flex-1 bg-gradient-to-l from-blue-400 to-transparent"
+          ></div>
+        </div>
+        <div
+          class="w-full max-w-4xl flex items-center text-7xl font-light gap-4 justify-between"
+        >
+          <div
+            class="h-14 rounded-full flex-1 bg-gradient-to-r from-blue-400 to-transparent"
+          ></div>
+
+          <div class="flex gap-2">
+            Has never been
+            <p class="font-black">Easier</p>
+          </div>
+        </div>
+        <div class="text-text text-text"></div>
+      </section>
+      <section
+        class="w-full h-auto flex flex-col gap-6 items-center justify-center"
+      >
+        <div class="w-[90vw] h-[700px] sm:aspect-auto bg-zinc-200"></div>
+      </section>
+      <section class="w-full max-w-6xl gap-3 h-auto flex flex-wrap mt-16">
+        <div
+          class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
+        ></div>
+        <div
+          class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
+        ></div>
+        <div
+          class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
+        ></div>
+      </section>
+      <section
+        class="w-full my-32 flex flex-col gap-4 items-center justify-center text-zinc-700"
+      >
+        <h2 class="font-black text-xl">Start bidding now</h2>
+        <a
+          class="w-80 h-14 bg-gradient-to-r from-blue-300 text-blue-950 to-transparent rounded-full flex items-center justify-center"
+        >
+          Register
+        </a>
       </section>
     </div>
   </body>

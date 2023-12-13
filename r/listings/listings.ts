@@ -2,12 +2,45 @@
 // TODO: Add search
 // TODO: Add filters
 // TODO: Add sorting
-// TODO: Add cards for listings
+// TODO: Edit cards to fit theme and UI design
 
 import { BASE_URL } from "../../src/ts/constants";
 import { clear } from "../../src/ts/ui";
 import { generateToast } from "../../src/ts/ui/toast/toaster";
 import { Listing } from "../../src/types/listing";
+
+const generateCard = (listing: Listing) => {
+  const { description, updated, title, tags, media, endsAt } = listing;
+
+  // Check if image exists, if not. Use placeholder
+
+  return `
+  <div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
+    <div class="w-full aspect-video relative">
+      <img
+        src=${media.length > 0 ? media[0] : "/public/placeholderimage.ong.webp"}
+        class="w-full aspect-video rounded-t-xl"
+      />
+      <div
+        class="absolute right-3 -bottom-3 bg-background shadow w-32 h-8 rounded-full flex items-center justify-center text-sm"
+      >
+        Ends in 2 days
+      </div>
+    </div>
+    <div class="flex flex-col h-auto px-4 text-sm text-text">
+      <p class="text-text/50">${title}</p>
+      <p class="font-heading text-base">
+        ${description}
+      </p>
+      <div class="flex items-center gap-3">
+
+      </div>
+      <div class="w-full h-auto mt-8 flex items-center gap-2 mb-2">
+     
+      </div>
+    </div>
+    </div>`;
+};
 
 const mainContainer = document.querySelector("#main-container") as HTMLElement;
 const paginationsContainer = document.querySelector(
@@ -49,13 +82,11 @@ const getListings = async () => {
   try {
     let res = await fetch(BASE_URL + `/listings?limit=20&offset=${offset}`);
     let data: Listing[] = await res.json();
-    mainContainer.innerHTML += `<pre class="text-sm max-w-7xl overflow-hidden">${JSON.stringify(
-      data,
-      null,
-      "\t"
-    )}</pre>`;
+    mainContainer.innerHTML += data.map((listing) => {
+      return generateCard(listing);
+    });
   } catch (error) {
-    generateToast("error", "Error");
+    generateToast("error", "Something went wrong");
   }
 };
 
@@ -81,7 +112,7 @@ const createPaginationButton = (page: number, text = "", active = false) => {
     "rounded-lg",
     "hover:bg-blue-500/10"
   );
-  active && paginationButton.classList.add("bg-blue-500/10");
+  active && paginationButton.classList.add("bg-blue-500/10", "aria-current");
 
   text
     ? (paginationButton.innerText = text)

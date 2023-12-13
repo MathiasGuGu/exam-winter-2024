@@ -36,6 +36,18 @@ userTokens.classList.add(
   "justify-center"
 );
 
+const uploadButton = document.createElement("a");
+uploadButton.href = "/r/upload/";
+uploadButton.innerText = "Upload";
+uploadButton.classList.add(
+  "px-6",
+  "mr-4",
+  "py-2",
+  "bg-blue-500",
+  "rounded-lg",
+  "text-blue-50"
+);
+
 isLoggedIn()
   ? ((userTokens.innerText = `${user.credit} credits`),
     userIcon.classList.add(
@@ -48,7 +60,8 @@ isLoggedIn()
   : null;
 
 isLoggedIn()
-  ? (navUserStateComponent.appendChild(userTokens),
+  ? (navUserStateComponent.appendChild(uploadButton),
+    navUserStateComponent.appendChild(userTokens),
     navUserStateComponent.appendChild(userIcon),
     navUserStateComponent.classList.add("flex", "gap-2"))
   : (navUserStateComponent.innerHTML = noUserTemplate);
