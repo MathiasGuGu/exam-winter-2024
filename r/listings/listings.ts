@@ -2,7 +2,7 @@
 // TODO: Add search
 // TODO: Add filters
 // TODO: Add sorting
-// TODO: Add cards for listings
+// TODO: Edit cards to fit theme and UI design
 
 import { BASE_URL } from "../../src/ts/constants";
 import { clear } from "../../src/ts/ui";
@@ -11,10 +11,14 @@ import { Listing } from "../../src/types/listing";
 
 const generateCard = (listing: Listing) => {
   const { description, updated, title, tags, media, endsAt } = listing;
-  return `<div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
+
+  // Check if image exists, if not. Use placeholder
+
+  return `
+  <div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
     <div class="w-full aspect-video relative">
       <img
-        src=${media[0]}
+        src=${media.length > 0 ? media[0] : "/public/placeholderimage.ong.webp"}
         class="w-full aspect-video rounded-t-xl"
       />
       <div
@@ -32,8 +36,7 @@ const generateCard = (listing: Listing) => {
 
       </div>
       <div class="w-full h-auto mt-8 flex items-center gap-2 mb-2">
-        <div class="w-10 aspect-square rounded-full bg-blue-600"></div>
-        <p>Magugu</p>
+     
       </div>
     </div>
     </div>`;
@@ -83,7 +86,7 @@ const getListings = async () => {
       return generateCard(listing);
     });
   } catch (error) {
-    generateToast("error", "Error");
+    generateToast("error", "Something went wrong");
   }
 };
 
@@ -109,7 +112,7 @@ const createPaginationButton = (page: number, text = "", active = false) => {
     "rounded-lg",
     "hover:bg-blue-500/10"
   );
-  active && paginationButton.classList.add("bg-blue-500/10");
+  active && paginationButton.classList.add("bg-blue-500/10", "aria-current");
 
   text
     ? (paginationButton.innerText = text)
