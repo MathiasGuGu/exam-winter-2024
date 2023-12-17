@@ -14,8 +14,21 @@ export function generateToast(type: string, message: string) {
       "items-center",
       "justify-center",
     ],
+    success: [
+      "absolute",
+      "bottom-6",
+      "right-6",
+      "px-6",
+      "py-3",
+      "bg-green-400",
+      "text-green-950",
+      "flex",
+      "items-center",
+      "justify-center",
+    ],
   };
 
+  // @ts-ignore
   toast.classList.add(...types[type]);
   toast.textContent = message;
   document.body.appendChild(toast);

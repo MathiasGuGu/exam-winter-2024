@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View listing | Auctioneer</title>
+    <meta name="description" content="View The Listing of id" />
+    <meta name="robots" content="noindex, nofollow" />
+    <script src="/src/main.ts" defer></script>
+    <script src="./index.ts" type="module" defer></script>
+    <script type="module" src="/src/ts/ui/navbar/navbar.ts" defer></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <nav
+      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+    >
+      <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
+        <div
+          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
+        >
+          <img
+            src="/public/auctionlogo.png"
+            alt="auctioneer logo"
+            class="h-10 w-10"
+          />
+        </div>
+        <a
+          href="/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Home</a
+        >
+        <a
+          href="/r/listings/"
+          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+        >
+          Listings</a
+        >
+      </ul>
+      <div
+        id="nav-user-state"
+        class="flex items-center justify-center font-body"
+      ></div>
+    </nav>
+    <section class="w-full h-auto flex  items-center justify-center font-body">
+      <div
+        class="flex flex-col gap-2 pt-20 w-full h-auto md:flex-row md:max-w-7xl md:justify-between"
+      >
+        <div
+          class="w-full flex items-center justify-center md:w-1/2 aspect-square border rounded border-blue-200"
+        >
+          <img
+          id="image"
+            src="/public/placeholderimage.ong.webp"
+            class="w-[95%] h-[95%] bg-blue-500 rounded object-cover"
+          />
+        </div>
+        <div class="flex flex-col flex-1  pt-6 px-12">
+          <h1 class="text-5xl" id="title">This is the title of the item</h1>
+          <div id="highest-bid" class="h-10 pl-6 pr-6 py-1 flex items-center justify-center bg-lime-200 text-lime-900 w-fit  gap-4 rounded-full">
+          </div>
+          <p class="text-text-500 mt-6" id="body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, enim
+            totam facere quidem eum, inventore amet fugiat quod omnis placeat
+            soluta? Nihil aperiam laudantium accusantium cum. Reprehenderit quas
+            quibusdam minima.
+          </p>
+          <div class="pt-6">
+            <h2 class="font-semibold">Time left of the auction:</h2>
+            
+            <div class="flex gap-2">
+                <div class="flex flex-col gap-2">
+                <div id="days" class=" bg-zinc-800 h-12 w-12 flex flex-col items-center justify-center text-white">
+                    <p >0</p>
+                </div>
+                    <p class="text-sm w-12 text-center">Days</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div id="hours" class=" bg-zinc-800 h-12 w-12 flex flex-col items-center justify-center text-white">
+                        <p >0</p>
+                    </div>
+                        <p class="text-sm w-12 text-center">Hours</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div id="minutes" class=" bg-zinc-800 h-12 w-12 flex flex-col items-center justify-center text-white">
+                        <p >0</p>
+                    </div>
+                        <p class="text-sm w-12 text-center">Minutes</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div id="seconds" class=" bg-zinc-800 h-12 w-12 flex flex-col items-center justify-center text-white">
+                        <p >0</p>
+                    </div>
+                        <p class="text-sm w-12 text-center">Seconds</p>
+                </div>
+            </div>
+          </div>
+          <div id="top-bids-container" class="pt-6 space-y-3">
+            <h2 class="font-semibold" id="top-bids">Top Bids:</h2>
+            <div class="flex flex-col gap-1" id="top-bids">
+              
+            </div>
+          </div>
+          
+
+            <form class="pt-6" id="place-bid">
+                <h2 class="font-semibold">Place a bid:</h2>
+                <div class="flex gap-2">
+                  <input
+                    type="number"
+                    name="amount"
+                    class="w-1/2 border border-blue-200 rounded px-2 py-1"
+                  />
+                <button
+                    class="px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                    Place bid
+                </button>
+              </div>
+          </form>
+      </div>
+    </section>
+    <section class="w-full flex mt-12 items-center justify-center">
+     <div class="w-full max-w-6xl flex flex-col">
+      <h3 class="text-2xl text-zinc-700 font-bold font-heading">Bidding history</h3>
+      <div id="bidding-container" class=" flex flex-col gap-4 my-12">
+        
+      </div>
+     </div>
+    </section>
+  </body>
+</html>

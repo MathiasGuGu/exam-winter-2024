@@ -4,27 +4,98 @@
 // TODO: Add sorting
 // TODO: Edit cards to fit theme and UI design
 
+import { getTimeRemaining } from "../../src/lib/utils";
 import { BASE_URL } from "../../src/ts/constants";
 import { clear } from "../../src/ts/ui";
 import { generateToast } from "../../src/ts/ui/toast/toaster";
 import { Listing } from "../../src/types/listing";
 
-const generateCard = (listing: Listing) => {
-  const { description, updated, title, tags, media, endsAt } = listing;
+const filterButton = document.querySelector("#filter-button") as HTMLElement;
+const filterForm = document.querySelector("#filter-form") as HTMLFormElement;
 
+// get all parameters from url
+
+// remove the page parameter from the url
+let searchFiltersUrl = new URLSearchParams(window.location.search);
+searchFiltersUrl.delete("page");
+let searchFilters = searchFiltersUrl.toString();
+
+filterButton.addEventListener("click", () => {
+  filterButton.classList.toggle("bg-zinc-200");
+  filterForm.classList.toggle("hidden");
+});
+
+filterForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  clear(mainContainer);
+  // get the state of all elements in the form
+
+  let filters = [];
+
+  const radioButtons = filterForm.querySelectorAll('input[type="radio"]');
+  const radioStates = Array.from(radioButtons)
+    .filter((radio: any) => radio.checked)
+    .map((radio: any) => radio.id);
+  filters.push(...radioStates);
+
+  const checkboxes = filterForm.querySelectorAll('input[type="checkbox"]');
+  const checkboxStates = Array.from(checkboxes)
+    .filter((check: any) => check.checked)
+    .map((check: any) => check.id);
+  filters.push(...checkboxStates);
+
+  filters = filters.map((filter) =>
+    filter
+      .replace("popularity", "")
+      .replace("date", "sort=created")
+      .replace("any", "sortOrder=desc")
+      .replace("low", "sortOrder=asc")
+      .replace("high", "sortOrder=desc")
+      .replace("active", "_active=true")
+      .replace("-", "&")
+  );
+
+  // add ? to start of string
+  let urlFilters = filters.join("&");
+  // add url filters to end of url
+
+  console.log(urlFilters);
+
+  searchFilters = urlFilters;
+
+  const filterSearchUrl =
+    BASE_URL +
+    `/listings?limit=20&offset=${offset}&_bids=true&_seller=true&` +
+    urlFilters;
+
+  pushState(1, searchFilters);
+
+  getListings(filterSearchUrl);
+  clear(paginationsContainer);
+  generatePaginationButtons(1);
+});
+
+const generateCard = (listing: Listing) => {
+  const { description, updated, title, tags, media, endsAt, id } = listing;
   // Check if image exists, if not. Use placeholder
 
+  let { days } = getTimeRemaining(endsAt);
+
+  if (days < 0) {
+    days = 0;
+  }
+
   return `
-  <div class="w-[23%] h-auto border flex flex-col gap-2 rounded-xl">
+  <a href="/r/listing/?id=${id}" class="md:w-[23%] w-1/2 h-auto border flex flex-col gap-2 rounded-xl">
     <div class="w-full aspect-video relative">
       <img
         src=${media.length > 0 ? media[0] : "/public/placeholderimage.ong.webp"}
-        class="w-full aspect-video rounded-t-xl"
+        class="w-full aspect-video object-cover rounded-t-xl"
       />
       <div
         class="absolute right-3 -bottom-3 bg-background shadow w-32 h-8 rounded-full flex items-center justify-center text-sm"
       >
-        Ends in 2 days
+        Ends in ${days} days
       </div>
     </div>
     <div class="flex flex-col h-auto px-4 text-sm text-text">
@@ -33,13 +104,11 @@ const generateCard = (listing: Listing) => {
         ${description}
       </p>
       <div class="flex items-center gap-3">
-
       </div>
       <div class="w-full h-auto mt-8 flex items-center gap-2 mb-2">
-     
       </div>
     </div>
-    </div>`;
+    </a>`;
 };
 
 const mainContainer = document.querySelector("#main-container") as HTMLElement;
@@ -55,20 +124,19 @@ if (!paginationsContainer) {
   throw new Error("No pagination container found");
 }
 
-let queryUrl = new URLSearchParams(window.location.search);
 const pushState = (page: number, filter: string) => {
-  history.pushState({}, "", `?page=${page}&filter=${filter}`);
+  history.pushState({}, "", `?page=${page}&${filter}`);
 };
+
 // defining offset for pagination
 let baseOffset: number = 20;
-let page = parseInt(queryUrl.get("page")!)
-  ? parseInt(queryUrl.get("page")!)
+let urlSearchParams = new URLSearchParams(window.location.search);
+let page = parseInt(urlSearchParams.get("page")!)
+  ? parseInt(urlSearchParams.get("page")!)
   : 1;
 
-pushState(page, "all");
-
-let offset: number = parseInt(queryUrl.get("page")!)
-  ? (parseInt(queryUrl.get("page")!) - 1) * baseOffset
+let offset: number = parseInt(urlSearchParams.get("page")!)
+  ? (parseInt(urlSearchParams.get("page")!) - 1) * baseOffset
   : 0;
 
 function updatePage(difference: number) {
@@ -76,15 +144,31 @@ function updatePage(difference: number) {
 }
 
 // push page and filter state to url
-
-// Get the user from API
-const getListings = async () => {
+function isValidUrl(url: string) {
   try {
-    let res = await fetch(BASE_URL + `/listings?limit=20&offset=${offset}`);
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+// Get the user from API
+const getListings = async (url: any) => {
+  try {
+    // create a new url search params object to add to the fetch
+    let res;
+    if (!isValidUrl(url)) {
+      res = await fetch(BASE_URL + `/listings?limit=20&offset=${offset}`);
+    } else {
+      console.log(isValidUrl(url));
+      res = await fetch(url);
+    }
     let data: Listing[] = await res.json();
-    mainContainer.innerHTML += data.map((listing) => {
-      return generateCard(listing);
-    });
+    mainContainer.innerHTML += data
+      .map((listing) => {
+        return generateCard(listing);
+      })
+      .join("");
   } catch (error) {
     generateToast("error", "Something went wrong");
   }
@@ -95,11 +179,14 @@ const paginate = (difference: number) => {
   offset = 0;
   offset = baseOffset * difference;
   updatePage(difference);
-  pushState(page + 1, "all");
+  pushState(page + 1, searchFilters);
   clear(mainContainer);
   clear(paginationsContainer);
   generatePaginationButtons(page);
-  getListings();
+
+  getListings(
+    BASE_URL + `/listings?limit=20&offset=${offset}&` + searchFilters
+  );
 };
 
 // pagination buttons
@@ -132,5 +219,6 @@ const generatePaginationButtons = (page: number) => {
   }
   createPaginationButton(30, ">>");
 };
-generatePaginationButtons(page);
-getListings();
+
+generatePaginationButtons(page - 1);
+getListings(BASE_URL + `/listings?limit=20&offset=${offset}&` + searchFilters);
