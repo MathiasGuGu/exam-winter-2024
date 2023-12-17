@@ -1,6 +1,7 @@
+import { clear } from "..";
 import { load } from "../../storage";
 
-function isLoggedIn() {
+export function isLoggedIn() {
   const user = load("user");
   const accessToken = load("accessToken");
 
@@ -10,6 +11,11 @@ function isLoggedIn() {
     return false;
   }
 }
+
+export const updateUserTokens = () => {
+  clear(userTokens);
+  userTokens.innerText = `${user.credit} credits`;
+};
 
 const navUserStateComponent = document.querySelector(
   "#nav-user-state"
@@ -25,8 +31,9 @@ const user = JSON.parse(userData);
 
 const userIcon = document.createElement("img") as HTMLImageElement;
 
-userIcon.src = user.avatar ? user.avatar : "/public/useravatar.png";
-
+if (user) {
+  userIcon.src = user.avatar ? user.avatar : "/public/useravatar.png";
+}
 const userTokens = document.createElement("div");
 userTokens.classList.add(
   "flex",
@@ -65,3 +72,5 @@ isLoggedIn()
     navUserStateComponent.appendChild(userIcon),
     navUserStateComponent.classList.add("flex", "gap-2"))
   : (navUserStateComponent.innerHTML = noUserTemplate);
+
+updateUserTokens();

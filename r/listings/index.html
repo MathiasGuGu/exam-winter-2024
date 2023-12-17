@@ -55,14 +55,127 @@
       class="w-screen h-auto flex flex-col items-center justify-start mt-24"
     >
       <section class="w-full h-auto min-h-16 flex flex-col max-w-7xl space-y-2">
-        <div class="flex gap-3 font-text text-sm text-text/50">
+        <div class="flex gap-3 items-center font-text text-sm text-text/50">
           <p class="text-text">Featured</p>
           <p>Artwork</p>
           <p>Apartments</p>
           <p>Utensils</p>
           <p class="text-blue-600">All categories</p>
+          <div
+            id="filter-button"
+            class="px-1 py-1 bg-zinc-200 hover:outline outline-1 outline-zinc-400 hover:cursor-pointer rounded"
+          >
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
         </div>
-        <div class="border-b w-ful"></div>
+        <form
+          id="filter-form"
+          class="w-full h-auto py-6 flex flex-col gap-5 flex-wrap text-sm text-zinc-600"
+        >
+          <!--
+            form for filtering the listings by end date, price, and category
+          -->
+
+          <div>
+            <input id="active" type="checkbox" class="peer hidden" />
+            <label
+              for="active"
+              class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+              >Only active listings</label
+            >
+          </div>
+
+          <div class="flex gap-2">
+            <div>
+              <input
+                id="popularity-high"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="popularity-high"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Most popular</label
+              >
+            </div>
+            <div>
+              <input
+                id="popularity-low"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="popularity-low"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Least Popular</label
+              >
+            </div>
+            <div>
+              <input
+                id="popularity-any"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="popularity-any"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Any</label
+              >
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <div>
+              <input
+                id="date-high"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="date-high"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Newest</label
+              >
+            </div>
+            <div>
+              <input
+                id="date-low"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="date-low"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Oldest</label
+              >
+            </div>
+            <div>
+              <input
+                id="date-any"
+                type="radio"
+                class="peer hidden"
+                name="popularity"
+              />
+              <label
+                for="date-any"
+                class="peer-checked:bg-zinc-200 py-2 px-4 w-fit border rounded"
+                >Any</label
+              >
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="bg-blue-500 text-blue-50 w-fit px-6 py-2"
+          >
+            Search
+          </button>
+        </form>
+
+        <div class="border-b w-full"></div>
         <div>
           <p class="text-text font-text text-sm">Featured Listings:</p>
         </div>
