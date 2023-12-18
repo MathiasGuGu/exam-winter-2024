@@ -113,6 +113,7 @@ const userData: any = load("user");
 const user = JSON.parse(userData);
 
 const userIcon = document.createElement("img") as HTMLImageElement;
+userIcon.id = "user-icon";
 userIcon.addEventListener("click", () => {
   if (!isLoggedIn()) return;
   accountContainer.classList.toggle("hidden");
