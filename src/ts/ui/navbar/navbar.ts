@@ -55,6 +55,7 @@ if (isLoggedIn()) {
     user = JSON.parse(user!);
     if (!user) return;
     try {
+      // @ts-ignore
       let res = await fetch(BASE_URL + `/profiles/${user.name}/media`, {
         method: "PUT",
         headers: {
@@ -62,6 +63,7 @@ if (isLoggedIn()) {
           Authorization: `Bearer ${load("accessToken")}`,
         },
         body: JSON.stringify({
+          // @ts-ignore
           avatar: e.target[0].value,
         }),
       });
