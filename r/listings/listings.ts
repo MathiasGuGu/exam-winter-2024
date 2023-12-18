@@ -46,7 +46,7 @@ filterForm.addEventListener("submit", (e) => {
 
   filters = filters.map((filter) =>
     filter
-      .replace("popularity", "")
+      .replace("popularity", "sort=endsAt")
       .replace("date", "sort=created")
       .replace("any", "sortOrder=desc")
       .replace("low", "sortOrder=asc")
@@ -232,10 +232,8 @@ function debounce(func: Function, wait: number) {
   };
 }
 
-async function getAllListings() {
-  const res = await fetch(
-    BASE_URL + `/listings?limit=100&offset=0&` + searchFilters
-  );
+async function getAllListings(searchQuery: string) {
+  const res = await fetch(BASE_URL + `/listings?_tag=${searchQuery}`);
   const data = await res.json();
   return await data;
 }
@@ -253,12 +251,9 @@ searchInput.addEventListener(
       return;
     }
 
-    const data = await getAllListings();
-    console.log(data);
-    const filtered = data.filter((listing: any) => {
-      return listing.title.toLowerCase().includes(e.target.value.toLowerCase());
-    });
-    mainContainer.innerHTML += filtered
+    const data = await getAllListings(e.target.value);
+
+    mainContainer.innerHTML += data
       .map((listing: any) => {
         return generateCard(listing);
       })
