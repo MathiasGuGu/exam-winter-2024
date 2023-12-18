@@ -1,4 +1,4 @@
-import { BASE_URL, REGISTER_URL } from "../../constants";
+import { REGISTER_URL } from "../../constants";
 import { RegisterResponse, fetchError } from "../../../types/listing";
 
 export async function register(
