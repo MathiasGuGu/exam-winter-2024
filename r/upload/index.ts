@@ -33,10 +33,16 @@ submitForm.addEventListener("submit", async (e) => {
 
   console.log(validation);
 
+  // remove bg-red-100 from all inputs
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach((input) => {
+    input.classList.remove("bg-red-100");
+  });
+
   if (validation.errors.length != 0) {
     validation.errors.forEach((error) => {
       const input = document.querySelector(`#${error}`) as HTMLInputElement;
-      input.classList.add("border-red-500");
+      input.classList.add("bg-red-100");
     });
   }
 
@@ -75,21 +81,13 @@ const validateForm = () => {
   let tags = data.tags;
   let endsAt = data.endsAt;
 
-  if (!title || !description || !media || !tags || !endsAt) {
+  if (!title || !endsAt) {
     const errors = [];
 
     if (!title) {
       errors.push("title");
     }
-    if (!description) {
-      errors.push("description");
-    }
-    if (!media) {
-      errors.push("media");
-    }
-    if (!tags) {
-      errors.push("tags");
-    }
+
     if (!endsAt) {
       errors.push("endsAt");
     }

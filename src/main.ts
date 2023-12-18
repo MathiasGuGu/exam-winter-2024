@@ -1,4 +1,11 @@
-import { createIcons, Gem, Home, SlidersHorizontal } from "lucide";
+import {
+  createIcons,
+  SlidersHorizontal,
+  ShoppingCart,
+  ArrowUpFromLine,
+  UserCircle,
+  User,
+} from "lucide";
 createIcons({
   attrs: {
     "stroke-width": 1,
@@ -6,8 +13,10 @@ createIcons({
     stroke: "#333",
   },
   icons: {
-    Gem,
-    Home,
+    ShoppingCart,
+    ArrowUpFromLine,
+    UserCircle,
+    User,
     SlidersHorizontal,
   },
 });

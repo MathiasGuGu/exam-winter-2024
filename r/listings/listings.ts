@@ -12,7 +12,7 @@ import { Listing } from "../../src/types/listing";
 
 const filterButton = document.querySelector("#filter-button") as HTMLElement;
 const filterForm = document.querySelector("#filter-form") as HTMLFormElement;
-
+const searchInput = document.querySelector("#search-input") as HTMLInputElement;
 // get all parameters from url
 
 // remove the page parameter from the url
@@ -99,8 +99,8 @@ const generateCard = (listing: Listing) => {
       </div>
     </div>
     <div class="flex flex-col h-auto px-4 text-sm text-text">
-      <p class="text-text/50">${title}</p>
-      <p class="font-heading text-base">
+      <p class="text-text/50 overflow-hidden">${title}</p>
+      <p class="font-heading text-base overflow-hidden">
         ${description}
       </p>
       <div class="flex items-center gap-3">
@@ -219,6 +219,52 @@ const generatePaginationButtons = (page: number) => {
   }
   createPaginationButton(30, ">>");
 };
+
+function debounce(func: Function, wait: number) {
+  let timeout: any;
+  return function run(...args: any[]) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+async function getAllListings() {
+  const res = await fetch(
+    BASE_URL + `/listings?limit=100&offset=0&` + searchFilters
+  );
+  const data = await res.json();
+  return await data;
+}
+
+searchInput.addEventListener(
+  "input",
+  debounce(async (e: any) => {
+    clear(mainContainer);
+
+    if (e.target.value.length == 0) {
+      clear(mainContainer);
+      getListings(
+        BASE_URL + `/listings?limit=20&offset=${offset}&` + searchFilters
+      );
+      return;
+    }
+
+    const data = await getAllListings();
+    console.log(data);
+    const filtered = data.filter((listing: any) => {
+      return listing.title.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    mainContainer.innerHTML += filtered
+      .map((listing: any) => {
+        return generateCard(listing);
+      })
+      .join("");
+  }, 500)
+);
 
 generatePaginationButtons(page - 1);
 getListings(BASE_URL + `/listings?limit=20&offset=${offset}&` + searchFilters);
