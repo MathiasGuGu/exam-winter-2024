@@ -1,9 +1,3 @@
-// TODO: Add pagination
-// TODO: Add search
-// TODO: Add filters
-// TODO: Add sorting
-// TODO: Edit cards to fit theme and UI design
-
 import { getTimeRemaining } from "../../src/lib/utils";
 import { BASE_URL } from "../../src/ts/constants";
 import { clear } from "../../src/ts/ui";
@@ -76,7 +70,7 @@ filterForm.addEventListener("submit", (e) => {
 });
 
 const generateCard = (listing: Listing) => {
-  const { description, updated, title, tags, media, endsAt, id } = listing;
+  const { description, title, media, endsAt, id } = listing;
   // Check if image exists, if not. Use placeholder
 
   let { days } = getTimeRemaining(endsAt);

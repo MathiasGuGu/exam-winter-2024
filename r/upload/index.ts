@@ -76,9 +76,6 @@ const validateForm = () => {
   const data = Object.fromEntries(formData);
 
   let title = data.title;
-  let description = data.description;
-  let media = data.media;
-  let tags = data.tags;
   let endsAt = data.endsAt;
 
   if (!title || !endsAt) {
