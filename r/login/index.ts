@@ -31,7 +31,7 @@ form.addEventListener("submit", async (e) => {
     name: loginResults.name,
     email: loginResults.email,
     avatar: loginResults.avatar,
-    credit: loginResults.credits,
+    credits: loginResults.credits,
   };
 
   save("user", JSON.stringify(user));

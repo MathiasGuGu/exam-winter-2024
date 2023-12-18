@@ -21,11 +21,11 @@
   </head>
   <body>
     <nav
-      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between md:px-24 text-text text-sm md:text-base bg-background"
     >
       <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
         <div
-          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
+          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 md:pr-12 font-body"
         >
           <img
             src="/public/auctionlogo.png"
@@ -35,7 +35,7 @@
         </div>
         <a
           href="/"
-          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+          class="px-4 py-2 hidden hover:bg-zinc-50/50 rounded md:flex items-center justify-center gap-1"
         >
           Home</a
         >
@@ -48,14 +48,67 @@
       </ul>
       <div
         id="nav-user-state"
-        class="flex items-center justify-center font-body"
+        class="flex items-center justify-center font-body relative"
+      >
+        <div
+          id="account-container"
+          class="absolute bg-background top-14 hidden px-2 right-0 w-48 h-auto min-h-20 border shadow-lg flex flex-col gap-3 py-6 items-center"
+        >
+          <div>Magugu</div>
+          <div class="w-full h-1 shadow-sm"></div>
+          <button id="manage-account" class="w-full py-1">
+            Manage account
+          </button>
+          <button id="logout" class="text-red-500 hover:bg-red-100 w-full py-1">
+            Sign out
+          </button>
+        </div>
+      </div>
+      <div
+        id="account-manager-backdrop"
+        class="w-screen h-screen hidden bg-black/5 absolute left-0 top-0"
       ></div>
+      <section
+        id="account-manager"
+        class="w-full md:w-[40%] hidden rounded h-96 bg-background border shadow absolute left-1/2 -translate-x-1/2 top-1/2 translate-y-1/2 flex flex-col items-center"
+      >
+        <button
+          id="account-manager-close"
+          class="w-full flex justify-end h-4 py-4 px-3"
+        >
+          close
+        </button>
+        <img
+          id="user-manager-avatar"
+          class="w-16 h-16 rounded-full"
+          src="/public/useravatar.png"
+        />
+        <div class="flex flex-col my-6 gap-2">
+          <p class="text-sm text-zinc-700">Change profile picture</p>
+          <form id="account-avatar-form" class="flex">
+            <input
+              name="avatarLink"
+              id="account-manager-avatar"
+              class="px-2 py-1 text-sm"
+              placeholder="Enter a valid image link"
+            />
+            <button
+              type="submit"
+              class="bg-blue-400 px-2 py-1 text-sm text-blue-50"
+            >
+              Change
+            </button>
+          </form>
+        </div>
+      </section>
     </nav>
     <main
       class="w-screen h-auto flex flex-col items-center justify-start mt-24"
     >
       <section class="w-full h-auto min-h-16 flex flex-col max-w-7xl space-y-2">
-        <div class="flex gap-3 items-center font-text text-sm text-text/50">
+        <div
+          class="flex flex-wrap px-2 gap-3 items-center font-text text-sm text-text/50"
+        >
           <p class="text-text">Featured</p>
           <p>Artwork</p>
           <p>Apartments</p>
@@ -70,7 +123,7 @@
         </div>
         <form
           id="filter-form"
-          class="w-full h-auto py-6 flex flex-col gap-5 flex-wrap text-sm text-zinc-600"
+          class="w-full h-auto py-6 px-2 flex flex-col gap-5 flex-wrap text-sm text-zinc-600"
         >
           <!--
             form for filtering the listings by end date, price, and category
@@ -176,13 +229,18 @@
         </form>
 
         <div class="border-b w-full"></div>
+        <input
+          id="search-input"
+          placeholder="search"
+          class="px-6 py-3 border rounded-full text-sm"
+        />
         <div>
           <p class="text-text font-text text-sm">Featured Listings:</p>
         </div>
       </section>
       <section
         id="main-container"
-        class="w-full max-w-7xl h-auto mt-6 mb-6 flex flex-wrap gap-2"
+        class="w-full max-w-7xl h-auto mt-6 mb-6 flex flex-wrap md:gap-2"
       >
         <!--
             Card component

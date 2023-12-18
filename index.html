@@ -20,48 +20,99 @@
   </head>
   <body>
     <nav
-      class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text"
-    >
-      <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
-        <div
-          class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
-        >
-          <img
-            src="/public/auctionlogo.png"
-            alt="auctioneer logo"
-            class="h-10 w-10"
-          />
-        </div>
-        <a
-          href="/"
-          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
-        >
-          Home</a
-        >
-        <a
-          href="/r/listings/"
-          class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
-        >
-          Listings</a
-        >
-      </ul>
+    class="w-screen fixed top-0 z-50 h-14 flex items-center justify-between px-24 text-text bg-background"
+  >
+    <ul class="h-full flex items-center justify-between mx-6 font-body gap-3">
       <div
-        id="nav-user-state"
-        class="flex items-center justify-center font-body"
-      ></div>
-    </nav>
+        class="w-auto h-8 rounded-full flex items-center justify-center gap-2 pr-12 font-body"
+      >
+        <img
+          src="/public/auctionlogo.png"
+          alt="auctioneer logo"
+          class="h-10 w-10"
+        />
+      </div>
+      <a
+        href="/"
+        class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+      >
+        Home</a
+      >
+      <a
+        href="/r/listings/"
+        class="px-4 py-2 hover:bg-zinc-50/50 rounded flex items-center justify-center gap-1"
+      >
+        Listings</a
+      >
+    </ul>
+    <div
+      id="nav-user-state"
+      class="flex items-center justify-center font-body relative"
+    >
+      <div
+        id="account-container"
+        class="absolute top-14 bg-background hidden px-2 right-0 w-48 h-auto min-h-20 border shadow-lg flex flex-col gap-3 py-6 items-center"
+      >
+        <div>Magugu</div>
+        <div class="w-full h-1 shadow-sm"></div>
+        <button id="manage-account" class="w-full py-1">
+          Manage account
+        </button>
+        <button id="logout" class="text-red-500 hover:bg-red-100 w-full py-1">
+          Sign out
+        </button>
+      </div>
+    </div>
+    <div
+      id="account-manager-backdrop"
+      class="w-screen h-screen hidden bg-black/5 absolute left-0 top-0"
+    ></div>
+    <section
+      id="account-manager"
+      class="w-full md:w-[40%] hidden rounded h-96 bg-background border shadow absolute left-1/2 -translate-x-1/2 top-1/2 translate-y-1/2 flex flex-col items-center"
+    >
+      <button
+        id="account-manager-close"
+        class="w-full flex justify-end h-4 py-4 px-3"
+      >
+        close
+      </button>
+      <img
+        id="user-manager-avatar"
+        class="w-16 h-16 rounded-full"
+        src="/public/useravatar.png"
+      />
+      <div class="flex flex-col my-6 gap-2">
+        <p class="text-sm text-zinc-700">Change profile picture</p>
+        <form id="account-avatar-form" class="flex">
+          <input
+            name="avatarLink"
+            id="account-manager-avatar"
+            class="px-2 py-1 text-sm"
+            placeholder="Enter a valid image link"
+          />
+          <button
+            type="submit"
+            class="bg-blue-400 px-2 py-1 text-sm text-blue-50"
+          >
+            Change
+          </button>
+        </form>
+      </div>
+    </section>
+  </nav>
     <div class="w-screen h-auto flex flex-col items-center justify-center">
       <section
-        class="w-full h-[90vh] flex flex-col items-center justify-center relative gap-3 text-zinc-700"
+        class="w-full h-[90vh] px-2 flex flex-col items-center justify-center relative gap-3 text-zinc-700"
       >
         <div class="w-full max-w-4xl flex items-center gap-24">
           <p>1000+ Listings</p>
           <p>100+ users</p>
         </div>
         <div
-          class="w-full max-w-4xl flex items-center text-7xl font-light gap-4 justify-between"
+          class="w-full max-w-4xl flex-wrap flex items-center text-7xl font-light gap-4 justify-between"
         >
-          <div class="flex gap-2">
+          <div class="flex gap-2 flex-wrap">
             <p class="font-black">Bidding</p>
             On Items
           </div>
@@ -70,13 +121,13 @@
           ></div>
         </div>
         <div
-          class="w-full max-w-4xl flex items-center text-7xl font-light gap-4 justify-between"
+          class="w-full max-w-4xl flex flex-wrap items-center text-7xl font-light gap-4 justify-between"
         >
           <div
             class="h-14 rounded-full flex-1 bg-gradient-to-r from-blue-400 to-transparent"
           ></div>
 
-          <div class="flex gap-2">
+          <div class="flex gap-2 flex-wrap">
             Has never been
             <p class="font-black">Easier</p>
           </div>
@@ -86,18 +137,27 @@
       <section
         class="w-full h-auto flex flex-col gap-6 items-center justify-center"
       >
-        <div class="w-[90vw] h-[700px] sm:aspect-auto bg-zinc-200"></div>
+        <img class="w-[90vw] h-[700px] sm:aspect-auto object-cover bg-zinc-200 shadow-lg" src="/public/auctioneer.png"></img>
       </section>
-      <section class="w-full max-w-6xl gap-3 h-auto flex flex-wrap mt-16">
+      <section class="w-full max-w-6xl gap-3 h-auto flex flex-wrap mt-16 font-heading">
+        <div
+          class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[50%] h-64 shadow-xl shadow-zinc-300/20"
+        >
+        <i data-lucide="user"></i>
+          Create an account
+        </div>
         <div
           class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
-        ></div>
+        >
+        <i data-lucide="shopping-cart"></i>
+        View listings
+        </div>
         <div
           class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
-        ></div>
-        <div
-          class="flex flex-col items-center justify-evenly rounded flex-grow min-w-[25%] h-64 shadow-xl shadow-zinc-300/20"
-        ></div>
+        >
+        <i data-lucide="arrow-up-from-line"></i>
+        List your own items
+        </div>
       </section>
       <section
         class="w-full my-32 flex flex-col gap-4 items-center justify-center text-zinc-700"

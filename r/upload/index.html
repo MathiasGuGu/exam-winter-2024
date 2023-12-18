@@ -40,14 +40,67 @@
       </ul>
       <div
         id="nav-user-state"
-        class="flex items-center justify-center font-body"
+        class="flex items-center justify-center font-body relative"
+      >
+        <div
+          id="account-container"
+          class="absolute top-14 bg-background hidden px-2 right-0 w-48 h-auto min-h-20 border shadow-lg flex flex-col gap-3 py-6 items-center"
+        >
+          <div>Magugu</div>
+          <div class="w-full h-1 shadow-sm"></div>
+          <button id="manage-account" class="w-full py-1">
+            Manage account
+          </button>
+          <button id="logout" class="text-red-500 hover:bg-red-100 w-full py-1">
+            Sign out
+          </button>
+        </div>
+      </div>
+      <div
+        id="account-manager-backdrop"
+        class="w-screen h-screen hidden bg-black/5 absolute left-0 top-0"
       ></div>
+      <section
+        id="account-manager"
+        class="w-full md:w-[40%] hidden rounded h-96 bg-background border shadow absolute left-1/2 -translate-x-1/2 top-1/2 translate-y-1/2 flex flex-col items-center"
+      >
+        <button
+          id="account-manager-close"
+          class="w-full flex justify-end h-4 py-4 px-3"
+        >
+          close
+        </button>
+        <img
+          id="user-manager-avatar"
+          class="w-16 h-16 rounded-full"
+          src="/public/useravatar.png"
+        />
+        <div class="flex flex-col my-6 gap-2">
+          <p class="text-sm text-zinc-700">Change profile picture</p>
+          <form id="account-avatar-form" class="flex">
+            <input
+              name="avatarLink"
+              id="account-manager-avatar"
+              class="px-2 py-1 text-sm"
+              placeholder="Enter a valid image link"
+            />
+            <button
+              type="submit"
+              class="bg-blue-400 px-2 py-1 text-sm text-blue-50"
+            >
+              Change
+            </button>
+          </form>
+        </div>
+      </section>
     </nav>
     <main>
       <section
-        class="w-full mt-96 h-12 flex flex-col gap-12 justify-center items-center"
+        class="w-full px-6 mt-20 h-auto flex flex-col gap-12 justify-center items-center"
       >
-        <div class="max-w-6xl h-auto w-full flex flex-col justify-center">
+        <div
+          class="max-w-6xl h-auto w-full flex flex-col justify-center items-center md:items-start"
+        >
           <h1 class="text-3xl font-light font-heading text-zinc-700">
             Upload you item to auctioneer
           </h1>
@@ -60,42 +113,47 @@
             off.
           </p>
         </div>
-        <div class="max-w-6xl h-auto w-full flex flex-col justify-center">
-          <form id="submit-form" class="flex flex-col gap-2 flex-1">
-            <label for="title">Title</label>
+        <div
+          class="max-w-6xl h-auto w-full flex flex-col justify-center items-center md:items-start"
+        >
+          <form
+            id="submit-form"
+            class="flex flex-col gap-2 flex-1 w-full items-center md:items-start"
+          >
+            <label for="title">Title *</label>
             <input
               id="title"
               name="title"
               type="text"
-              class="border border-zinc-200 rounded py-2 px-3 max-w-[50%] flex-1"
+              class="border border-zinc-200 rounded py-2 px-3 w-full md:max-w-[50%] flex-1"
             />
             <label for="description">Description</label>
             <input
               id="description"
               name="description"
               type="text"
-              class="border border-zinc-200 rounded py-2 px-3 max-w-[50%] flex-1"
+              class="border border-zinc-200 rounded py-2 px-3 w-full md:max-w-[50%] flex-1"
             />
             <label for="tags">Tags - seperated by newline</label>
             <textarea
               id="tags"
               name="tags"
               type="text"
-              class="border border-zinc-200 rounded py-2 px-3 max-w-[50%] flex-1"
+              class="border border-zinc-200 rounded py-2 px-3 w-full md:max-w-[50%] flex-1"
             ></textarea>
             <label for="media">Media - separated by newline</label>
             <textarea
               id="media"
               name="media"
               type="text"
-              class="border border-zinc-200 rounded py-2 px-3 max-w-[50%] flex-1"
+              class="border border-zinc-200 rounded py-2 px-3 w-full md:max-w-[50%] flex-1"
             ></textarea>
-            <label for="endsAt">EndsAt</label>
+            <label for="endsAt">EndsAt *</label>
             <input
               id="endsAt"
               name="endsAt"
               type="date"
-              class="border border-zinc-200 rounded py-2 px-3 max-w-[50%] flex-1"
+              class="border border-zinc-200 rounded py-2 px-3 w-full md:max-w-[50%] flex-1"
             />
             <button type="submit" class="px-8 py-2 rounded w-fit bg-blue-400">
               Submit

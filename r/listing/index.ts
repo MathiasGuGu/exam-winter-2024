@@ -53,6 +53,7 @@ const renderListing = async () => {
     <p class="text-xl text-zinc-600">No bids yet</p>
     `;
   } else {
+    // @ts-ignore because dont want to update the type
     listing.bids.map((bid: any, i: number) => {
       biddingContainer.innerHTML += `
       <div>
