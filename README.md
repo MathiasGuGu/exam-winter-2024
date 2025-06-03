@@ -1,42 +1,48 @@
-# Exam 2024
+# 🌴 Auctioneer
 
-![Screenshot 2023-12-18 at 00.05.37.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/7c3ee956-bd24-4aa0-bd80-70fb96c5455d/804c72e2-f1df-4b13-b127-e0645253fa5f/Screenshot_2023-12-18_at_00.05.37.png)
+**Auctioneer** is a auction website that lets Noroff students list items for auction and participate in auctions.
+---
 
-## Description
+## ✨ Features
 
-Auctioneer is a fictional auction website that lets users with a `stud.noroff.no`address register and sign in. The auction site lets users create listings and bid on listings.
+Auctioneer lets you:
 
-## Assignment
+- 🔍 Discover live auctions and items.
+- 🧭 Bid for items on the live auction feed.
+- 🏨 List their own items for auction.
 
-An auction site is looking to launch a website where users
-can add items to be bid on and bid on items other users have put up for
-auction. When a new user joins the website, they are given 1000 credits
-to use on the site. They can get credits by selling items and use
-credit by buying items. Non-registered users can search through the
-listings, but only registered users can make bids on listings.
+---
 
-### Clone The Repository
+## 🛠️ Built With
 
-```jsx
-git clone *repo link*
+- [React.js](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TanStack Query (React Query)](https://tanstack.com/query/latest)
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a local copy up and running.
+
+### 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone git@github.com:MathiasGuGu/exam-winter-2024
 ```
+Install dependencies:
 
-### Install dependencies
-
-```jsx
+```bash
 npm install
 ```
 
-### Run the project locally
+▶️ Running the App
 
-```jsx
+To run the development server:
+```bash
 npm run dev
-```
-
-### Build the project
-
-```jsx
-npm run build
 ```
 
 live site: [Here](https://main--funny-hotteok-1ffc10.netlify.app/)
